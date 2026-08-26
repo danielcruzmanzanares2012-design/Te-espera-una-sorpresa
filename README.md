@@ -1,2 +1,165 @@
 # Te-espera-una-sorpresa
 Viene algo interesante 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Quieres ser mi novia?</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffe6eb 0%, #ffb6c1 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      position: relative;
+    }
+
+    h1 {
+      color: #d63384;
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+      line-height: 1.3;
+    }
+
+    .heart-icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      animation: pulse 1.5s infinite;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-top: 20px;
+      position: relative;
+      min-height: 60px;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+
+    #btn-yes {
+      background-color: #28a745;
+      color: white;
+      box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+    }
+
+    #btn-yes:hover {
+      background-color: #218838;
+      transform: scale(1.05);
+    }
+
+    #btn-no {
+      background-color: #dc3545;
+      color: white;
+      box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+      position: relative;
+    }
+
+    .message {
+      display: none;
+      margin-top: 25px;
+      font-size: 1.3rem;
+      color: #d63384;
+      font-weight: bold;
+      animation: fadeIn 1s forwards;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="heart-icon">❤️</div>
+    <h1 id="question">¿Quieres ser mi novia?</h1>
+
+    <div class="buttons" id="button-group">
+      <button id="btn-yes">¡Sí!</button>
+      <button id="btn-no">No</button>
+    </div>
+
+    <div class="message" id="response-message">
+      ¡Sabía que dirías que sí! 💘🥹
+    </div>
+  </div>
+
+  <script>
+    const btnYes = document.getElementById('btn-yes');
+    const btnNo = document.getElementById('btn-no');
+    const responseMessage = document.getElementById('response-message');
+    const question = document.getElementById('question');
+    const buttonGroup = document.getElementById('button-group');
+
+    // Acción al hacer clic en "Sí"
+    btnYes.addEventListener('click', () => {
+      question.innerText = "¡Me haces la persona más feliz! ❤️";
+      buttonGroup.style.display = 'none';
+      responseMessage.style.display = 'block';
+    });
+
+    // Hacer que el botón "No" se mueva cuando intentan tocarlo
+    const moveNoButton = () => {
+      const containerRect = document.querySelector('.container').getBoundingClientRect();
+      const btnRect = btnNo.getBoundingClientRect();
+
+      const maxX = containerRect.width - btnRect.width - 20;
+      const maxY = containerRect.height - btnRect.height - 20;
+
+      const randomX = Math.floor(Math.random() * maxX) - (containerRect.width / 2 - btnRect.width);
+      const randomY = Math.floor(Math.random() * maxY) - (containerRect.height / 2 - btnRect.height);
+
+      btnNo.style.position = 'absolute';
+      btnNo.style.left = `${Math.max(10, Math.min(randomX, maxX))}px`;
+      btnNo.style.top = `${Math.max(10, Math.min(randomY, maxY))}px`;
+    };
+
+    btnNo.addEventListener('mouseover', moveNoButton);
+    btnNo.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      moveNoButton();
+    });
+  </script>
+
+</body>
+</html>
