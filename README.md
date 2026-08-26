@@ -133,7 +133,7 @@ Viene algo interesante
 
     // Acción al hacer clic en "Sí"
     btnYes.addEventListener('click', () => {
-      question.innerText = "¡Me haces la persona más feliz! ❤️";
+      question.innerText = "¡Me haces la persona más feliz y ahora no esperan un monton de dias juntos apoyandonos del uno para el otro💞🥹";
       buttonGroup.style.display = 'none';
       responseMessage.style.display = 'block';
     });
